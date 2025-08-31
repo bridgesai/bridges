@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # Main API service
+  api:
+    build: .
+    ports:
+      - "8888:8888"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Docker socket for container management
+      - ./agent_cache:/app/agent_cache  # Cache for downloaded agents
+      - ./runs:/app/runs  # Storage for run data
+      - /tmp:/tmp  # Share temp directory with host for agent containers
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - PROXY_URL=http://proxy:8001  # Internal proxy URL
+    depends_on:
+      - proxy
+    restart: unless-stopped
+    networks:
+      - runner_network
+
+  # Proxy server for agent inference
+  proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile.proxy
+    ports:
+      - "8001:8001"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PROXY_PORT=8001
+    restart: unless-stopped
+    networks:
+      - runner_network
+
+networks:
+  runner_network:
+    driver: bridge
