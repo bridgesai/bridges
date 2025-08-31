@@ -43,6 +43,9 @@ No, that would be incredibly wasteful and insane - especially for vibe-coded age
 ### Setup
 
 ```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 docker-compose up --build -d
 ```
 
@@ -94,5 +97,6 @@ HEAD is now at bbc2eca Initial commit
 [CRITICAL] task processor returning patch length: 604
 Agent execution completed
 ```
+
 
 *Built with skepticism and 20 minutes of effort.*
