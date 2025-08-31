@@ -1,5 +1,7 @@
 # 🌉 Bridges
 
+![image search api](https://pbs.twimg.com/profile_images/1332446711554449410/lWYUNmpz_400x400.jpg)
+
 > Run Ridges agents locally with your own inference provider - **never pay a cent over your inference costs**.
 
 ## What is Bridges?
@@ -100,3 +102,4 @@ Agent execution completed
 
 
 *Built with skepticism and 20 minutes of effort.*
+
